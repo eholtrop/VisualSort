@@ -39,7 +39,10 @@
             this.quick3_button = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.sort_panel = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.populate_random = new System.Windows.Forms.Button();
+            this.populate_almost_sorted = new System.Windows.Forms.Button();
+            this.populate_reversed = new System.Windows.Forms.Button();
+            this.populate_custom = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +64,7 @@
             this.selection_button.TabIndex = 2;
             this.selection_button.Text = "Selection";
             this.selection_button.UseVisualStyleBackColor = true;
+            this.selection_button.Click += new System.EventHandler(this.selection_button_Click);
             // 
             // bubble_button
             // 
@@ -140,28 +144,60 @@
             this.sort_panel.Size = new System.Drawing.Size(357, 270);
             this.sort_panel.TabIndex = 10;
             // 
-            // textBox1
+            // populate_random
             // 
-            this.textBox1.Location = new System.Drawing.Point(470, 13);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(123, 270);
-            this.textBox1.TabIndex = 11;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.populate_random.Location = new System.Drawing.Point(12, 289);
+            this.populate_random.Name = "populate_random";
+            this.populate_random.Size = new System.Drawing.Size(90, 23);
+            this.populate_random.TabIndex = 12;
+            this.populate_random.Text = "Random";
+            this.populate_random.UseVisualStyleBackColor = true;
+            this.populate_random.Click += new System.EventHandler(this.populate_random_Click);
+            // 
+            // populate_almost_sorted
+            // 
+            this.populate_almost_sorted.Location = new System.Drawing.Point(108, 289);
+            this.populate_almost_sorted.Name = "populate_almost_sorted";
+            this.populate_almost_sorted.Size = new System.Drawing.Size(90, 23);
+            this.populate_almost_sorted.TabIndex = 13;
+            this.populate_almost_sorted.Text = "Almost Sorted";
+            this.populate_almost_sorted.UseVisualStyleBackColor = true;
+            this.populate_almost_sorted.Click += new System.EventHandler(this.populate_almost_sorted_Click);
+            // 
+            // populate_reversed
+            // 
+            this.populate_reversed.Location = new System.Drawing.Point(204, 289);
+            this.populate_reversed.Name = "populate_reversed";
+            this.populate_reversed.Size = new System.Drawing.Size(90, 23);
+            this.populate_reversed.TabIndex = 14;
+            this.populate_reversed.Text = "Reversed";
+            this.populate_reversed.UseVisualStyleBackColor = true;
+            this.populate_reversed.Click += new System.EventHandler(this.populate_reversed_Click);
+            // 
+            // populate_custom
+            // 
+            this.populate_custom.Location = new System.Drawing.Point(300, 289);
+            this.populate_custom.Name = "populate_custom";
+            this.populate_custom.Size = new System.Drawing.Size(90, 23);
+            this.populate_custom.TabIndex = 15;
+            this.populate_custom.Text = "Custom";
+            this.populate_custom.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 291);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(472, 321);
+            this.Controls.Add(this.populate_custom);
+            this.Controls.Add(this.populate_reversed);
+            this.Controls.Add(this.populate_almost_sorted);
+            this.Controls.Add(this.populate_random);
             this.Controls.Add(this.sort_panel);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -178,7 +214,10 @@
         private System.Windows.Forms.Button quick3_button;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel sort_panel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button populate_random;
+        private System.Windows.Forms.Button populate_almost_sorted;
+        private System.Windows.Forms.Button populate_reversed;
+        private System.Windows.Forms.Button populate_custom;
     }
 }
 
