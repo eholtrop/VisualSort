@@ -65,7 +65,6 @@ namespace VisualSort
             d[i] = d[j];
             d[j] = temp;
             data = d;
-            Thread.Sleep(sleepTime);
 
             return data;
         }
