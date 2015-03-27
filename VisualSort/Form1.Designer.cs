@@ -38,11 +38,10 @@
             this.quick_button = new System.Windows.Forms.Button();
             this.quick3_button = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.sort_panel = new System.Windows.Forms.Panel();
             this.populate_random = new System.Windows.Forms.Button();
-            this.populate_almost_sorted = new System.Windows.Forms.Button();
             this.populate_reversed = new System.Windows.Forms.Button();
             this.populate_custom = new System.Windows.Forms.Button();
+            this.barGraph1 = new VisualSort.BarGraph();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,6 +73,7 @@
             this.bubble_button.TabIndex = 3;
             this.bubble_button.Text = "Bubble";
             this.bubble_button.UseVisualStyleBackColor = true;
+            this.bubble_button.Click += new System.EventHandler(this.bubble_button_Click);
             // 
             // shell_button
             // 
@@ -137,13 +137,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sorting Algorithms";
             // 
-            // sort_panel
-            // 
-            this.sort_panel.Location = new System.Drawing.Point(12, 13);
-            this.sort_panel.Name = "sort_panel";
-            this.sort_panel.Size = new System.Drawing.Size(357, 270);
-            this.sort_panel.TabIndex = 10;
-            // 
             // populate_random
             // 
             this.populate_random.Location = new System.Drawing.Point(12, 289);
@@ -154,19 +147,9 @@
             this.populate_random.UseVisualStyleBackColor = true;
             this.populate_random.Click += new System.EventHandler(this.populate_random_Click);
             // 
-            // populate_almost_sorted
-            // 
-            this.populate_almost_sorted.Location = new System.Drawing.Point(108, 289);
-            this.populate_almost_sorted.Name = "populate_almost_sorted";
-            this.populate_almost_sorted.Size = new System.Drawing.Size(90, 23);
-            this.populate_almost_sorted.TabIndex = 13;
-            this.populate_almost_sorted.Text = "Almost Sorted";
-            this.populate_almost_sorted.UseVisualStyleBackColor = true;
-            this.populate_almost_sorted.Click += new System.EventHandler(this.populate_almost_sorted_Click);
-            // 
             // populate_reversed
             // 
-            this.populate_reversed.Location = new System.Drawing.Point(204, 289);
+            this.populate_reversed.Location = new System.Drawing.Point(108, 289);
             this.populate_reversed.Name = "populate_reversed";
             this.populate_reversed.Size = new System.Drawing.Size(90, 23);
             this.populate_reversed.TabIndex = 14;
@@ -176,23 +159,30 @@
             // 
             // populate_custom
             // 
-            this.populate_custom.Location = new System.Drawing.Point(300, 289);
+            this.populate_custom.Location = new System.Drawing.Point(204, 289);
             this.populate_custom.Name = "populate_custom";
             this.populate_custom.Size = new System.Drawing.Size(90, 23);
             this.populate_custom.TabIndex = 15;
             this.populate_custom.Text = "Custom";
             this.populate_custom.UseVisualStyleBackColor = true;
             // 
+            // barGraph1
+            // 
+            this.barGraph1.data = null;
+            this.barGraph1.Location = new System.Drawing.Point(13, 13);
+            this.barGraph1.Name = "barGraph1";
+            this.barGraph1.Size = new System.Drawing.Size(356, 270);
+            this.barGraph1.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 321);
+            this.Controls.Add(this.barGraph1);
             this.Controls.Add(this.populate_custom);
             this.Controls.Add(this.populate_reversed);
-            this.Controls.Add(this.populate_almost_sorted);
             this.Controls.Add(this.populate_random);
-            this.Controls.Add(this.sort_panel);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -213,11 +203,10 @@
         private System.Windows.Forms.Button quick_button;
         private System.Windows.Forms.Button quick3_button;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel sort_panel;
         private System.Windows.Forms.Button populate_random;
-        private System.Windows.Forms.Button populate_almost_sorted;
         private System.Windows.Forms.Button populate_reversed;
         private System.Windows.Forms.Button populate_custom;
+        private BarGraph barGraph1;
     }
 }
 
