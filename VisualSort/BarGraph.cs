@@ -13,7 +13,12 @@ namespace VisualSort
 {
     public partial class BarGraph : UserControl
     {
-        public int sleepTime = 10;
+        public int sleepTime = 100;
+
+        private Graphics graphics
+        {
+            get { return draw_panel.CreateGraphics(); }
+        }
 
         private int[] mData;
         public int[] data
@@ -33,21 +38,19 @@ namespace VisualSort
 
         public void Select(int i)
         {
-            drawRectangle(draw_panel.CreateGraphics(),
+            drawRectangle(graphics,
                 new SolidBrush(Color.Red),
                 new Pen(Color.Gray),
                 i);
-
             Thread.Sleep(sleepTime);
         }
 
         public void UnSelect(int i)
         {
-            drawRectangle(draw_panel.CreateGraphics(),
+            drawRectangle(graphics,
                 new SolidBrush(Color.Black),
                 new Pen(Color.Gray),
                 i);
-
             Thread.Sleep(sleepTime);
         }
 
@@ -72,7 +75,7 @@ namespace VisualSort
             if (data == null)
                 return;
 
-            Graphics g = draw_panel.CreateGraphics();
+            Graphics g = graphics;
             Pen p = new Pen(Color.Gray);
             SolidBrush b = new SolidBrush(Color.Black);
 

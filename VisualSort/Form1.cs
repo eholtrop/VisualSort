@@ -49,15 +49,16 @@ namespace VisualSort
                 int min = i;
                 for (int j = i + 1; j < data.Length; j++)
                 {
-                    barGraph1.Select(j);
+
                     if (data[j] < data[min])
                     {
+                        barGraph1.UnSelect(min);
                         min = j;
+                        barGraph1.Select(min);
                     }
                 }
 
                 barGraph1.Swap(i, min);
-                Thread.Sleep(sleepTime);
             }
         }
 
@@ -70,7 +71,6 @@ namespace VisualSort
                 {
                     if (data[j] > data[j + 1])
                     {
-
                         data = barGraph1.Swap(j, j+1);
                     }
                 }

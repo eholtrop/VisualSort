@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.draw_panel = new System.Windows.Forms.Panel();
+            this.draw_panel = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.draw_panel)).BeginInit();
             this.SuspendLayout();
             // 
             // draw_panel
             // 
-            this.draw_panel.BackColor = System.Drawing.Color.White;
             this.draw_panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.draw_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.draw_panel.Location = new System.Drawing.Point(0, 0);
             this.draw_panel.Name = "draw_panel";
             this.draw_panel.Size = new System.Drawing.Size(340, 315);
             this.draw_panel.TabIndex = 0;
+            this.draw_panel.TabStop = false;
             // 
             // BarGraph
             // 
@@ -48,12 +49,14 @@
             this.Controls.Add(this.draw_panel);
             this.Name = "BarGraph";
             this.Size = new System.Drawing.Size(340, 315);
+            ((System.ComponentModel.ISupportInitialize)(this.draw_panel)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel draw_panel;
+        private System.Windows.Forms.PictureBox draw_panel;
+
     }
 }
