@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.data_text_box = new System.Windows.Forms.TextBox();
             this.insertion_button = new System.Windows.Forms.Button();
             this.selection_button = new System.Windows.Forms.Button();
             this.bubble_button = new System.Windows.Forms.Button();
@@ -40,15 +39,9 @@
             this.quick3_button = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.sort_panel = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // data_text_box
-            // 
-            this.data_text_box.Location = new System.Drawing.Point(12, 289);
-            this.data_text_box.Name = "data_text_box";
-            this.data_text_box.Size = new System.Drawing.Size(451, 20);
-            this.data_text_box.TabIndex = 0;
             // 
             // insertion_button
             // 
@@ -58,6 +51,7 @@
             this.insertion_button.TabIndex = 1;
             this.insertion_button.Text = "Insertion";
             this.insertion_button.UseVisualStyleBackColor = true;
+            this.insertion_button.Click += new System.EventHandler(this.insertion_button_Click);
             // 
             // selection_button
             // 
@@ -132,7 +126,7 @@
             this.groupBox1.Controls.Add(this.heap_button);
             this.groupBox1.Controls.Add(this.shell_button);
             this.groupBox1.Controls.Add(this.merge_button);
-            this.groupBox1.Location = new System.Drawing.Point(375, 12);
+            this.groupBox1.Location = new System.Drawing.Point(375, 13);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(88, 271);
             this.groupBox1.TabIndex = 9;
@@ -145,16 +139,24 @@
             this.sort_panel.Name = "sort_panel";
             this.sort_panel.Size = new System.Drawing.Size(357, 270);
             this.sort_panel.TabIndex = 10;
-            this.sort_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.sort_panel_Paint);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(470, 13);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(123, 270);
+            this.textBox1.TabIndex = 11;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 316);
+            this.ClientSize = new System.Drawing.Size(605, 291);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.sort_panel);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.data_text_box);
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
@@ -166,7 +168,6 @@
         #endregion
 
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
-        private System.Windows.Forms.TextBox data_text_box;
         private System.Windows.Forms.Button insertion_button;
         private System.Windows.Forms.Button selection_button;
         private System.Windows.Forms.Button bubble_button;
@@ -177,6 +178,7 @@
         private System.Windows.Forms.Button quick3_button;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel sort_panel;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
