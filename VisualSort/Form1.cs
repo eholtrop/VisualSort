@@ -30,14 +30,13 @@ namespace VisualSort
                 int j = i;
                 while (j > 0 && data[j - 1] > x)
                 {
+                    barGraph1.SelectAll(new int[] { j, j-1 });
                     barGraph1.Swap(j, j -1);
                     j -= 1;
                     barGraph1.data = data;
-                    Thread.Sleep(sleepTime);
                 }
                 data[j] = x;
                 barGraph1.data = data;
-                Thread.Sleep(sleepTime);
             }
         }
 
@@ -47,17 +46,28 @@ namespace VisualSort
             for (int i = 0; i < data.Length; i ++)
             {
                 int min = i;
+                //select the pivot point
+                barGraph1.Select(i);
                 for (int j = i + 1; j < data.Length; j++)
                 {
-
+                    //select the potential min
+                    barGraph1.Select(j);
                     if (data[j] < data[min])
                     {
-                        barGraph1.UnSelect(min);
+                        //ignore unselect if first iteration
+                        if (j != i+1) barGraph1.UnSelect(min);
                         min = j;
+                        //select new min
                         barGraph1.Select(min);
+                    }
+                    if (j != min)
+                    {
+                        //we dont care about this index anymore.. so unselect it
+                        barGraph1.UnSelect(j);
                     }
                 }
 
+                //swap the pivot and min
                 barGraph1.Swap(i, min);
             }
         }
