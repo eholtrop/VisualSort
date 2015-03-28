@@ -36,6 +36,18 @@ namespace VisualSort
             InitializeComponent();
         }
 
+        public void SelectAll(int[] arr)
+        {
+            foreach (int i in arr)
+            {
+                drawRectangle(graphics,
+                    new SolidBrush(Color.Red),
+                    new Pen(Color.Gray),
+                    i);
+            }
+            Thread.Sleep(sleepTime);
+        }
+
         public void Select(int i)
         {
             drawRectangle(graphics,
@@ -45,20 +57,28 @@ namespace VisualSort
             Thread.Sleep(sleepTime);
         }
 
+        public void Unselect(int[] arr)
+        {
+            foreach (int i in arr)
+            {
+                drawRectangle(graphics,
+                    new SolidBrush(Color.Black),
+                    new Pen(Color.Gray),
+                    i);
+            }
+            Thread.Sleep(sleepTime);
+        }
+
         public void UnSelect(int i)
         {
             drawRectangle(graphics,
                 new SolidBrush(Color.Black),
                 new Pen(Color.Gray),
                 i);
-            Thread.Sleep(sleepTime);
         }
 
         public int[] Swap(int i, int j)
         {
-            Select(i);
-            Select(j);
-
             int[] d = this.data;
 
             int temp = d[i];
