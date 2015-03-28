@@ -81,6 +81,7 @@ namespace VisualSort
                 {
                     if (data[j] > data[j + 1])
                     {
+                        barGraph1.SelectAll(new int[] {j, j+1});
                         data = barGraph1.Swap(j, j+1);
                     }
                 }
