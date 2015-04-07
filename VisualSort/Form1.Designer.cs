@@ -42,7 +42,9 @@
             this.populate_reversed = new System.Windows.Forms.Button();
             this.populate_custom = new System.Windows.Forms.Button();
             this.barGraph1 = new VisualSort.BarGraph();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // insertion_button
@@ -83,6 +85,7 @@
             this.shell_button.TabIndex = 4;
             this.shell_button.Text = "Shell";
             this.shell_button.UseVisualStyleBackColor = true;
+            this.shell_button.Click += new System.EventHandler(this.shell_button_Click);
             // 
             // merge_button
             // 
@@ -92,6 +95,7 @@
             this.merge_button.TabIndex = 5;
             this.merge_button.Text = "Merge";
             this.merge_button.UseVisualStyleBackColor = true;
+            this.merge_button.Click += new System.EventHandler(this.merge_button_Click);
             // 
             // heap_button
             // 
@@ -172,13 +176,33 @@
             this.barGraph1.Location = new System.Drawing.Point(13, 13);
             this.barGraph1.Name = "barGraph1";
             this.barGraph1.Size = new System.Drawing.Size(356, 270);
+            this.barGraph1.sleepTime = 0;
             this.barGraph1.TabIndex = 16;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(342, 289);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 17;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 321);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.barGraph1);
             this.Controls.Add(this.populate_custom);
             this.Controls.Add(this.populate_reversed);
@@ -187,6 +211,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -207,6 +232,7 @@
         private System.Windows.Forms.Button populate_reversed;
         private System.Windows.Forms.Button populate_custom;
         private BarGraph barGraph1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

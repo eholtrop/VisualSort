@@ -13,7 +13,12 @@ namespace VisualSort
 {
     public partial class BarGraph : UserControl
     {
-        public int sleepTime = 100;
+        private int _sleepTime = 250;
+        public int sleepTime
+        {
+            get { return _sleepTime; }
+            set { _sleepTime = value; }
+        }
 
         private Graphics graphics
         {
@@ -34,6 +39,18 @@ namespace VisualSort
         public BarGraph()
         {
             InitializeComponent();
+        }
+
+        public void SelectRange(int start, int finish)
+        {
+            for (int i = start; i < finish; i ++)
+            {
+                drawRectangle(graphics,
+                    new SolidBrush(Color.Red),
+                    new Pen(Color.Gray),
+                    i);
+            }
+            Thread.Sleep(sleepTime);
         }
 
         public void SelectAll(int[] arr)
