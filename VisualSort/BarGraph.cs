@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VisualSort
@@ -16,7 +17,7 @@ namespace VisualSort
         private int _sleepTime = 250;
         public int sleepTime
         {
-            get { return _sleepTime; }
+            get { return 250; }
             set { _sleepTime = value; }
         }
 
@@ -41,7 +42,7 @@ namespace VisualSort
             InitializeComponent();
         }
 
-        public void SelectRange(int start, int finish)
+        public async Task SelectRange(int start, int finish)
         {
             for (int i = start; i < finish; i ++)
             {
@@ -50,10 +51,10 @@ namespace VisualSort
                     new Pen(Color.Gray),
                     i);
             }
-            Thread.Sleep(sleepTime);
+            await Task.Delay(sleepTime);
         }
 
-        public void SelectAll(int[] arr)
+        public async Task SelectAll(int[] arr)
         {
             foreach (int i in arr)
             {
@@ -62,19 +63,19 @@ namespace VisualSort
                     new Pen(Color.Gray),
                     i);
             }
-            Thread.Sleep(sleepTime);
+            await Task.Delay(sleepTime);
         }
 
-        public void Select(int i)
+        public async Task Select(int i)
         {
             drawRectangle(graphics,
                 new SolidBrush(Color.Red),
                 new Pen(Color.Gray),
                 i);
-            Thread.Sleep(sleepTime);
+            await Task.Delay(sleepTime);
         }
 
-        public void Unselect(int[] arr)
+        public async Task Unselect(int[] arr)
         {
             foreach (int i in arr)
             {
@@ -83,7 +84,7 @@ namespace VisualSort
                     new Pen(Color.Gray),
                     i);
             }
-            Thread.Sleep(sleepTime);
+            await Task.Delay(sleepTime);
         }
 
         public void UnSelect(int i)

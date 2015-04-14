@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -21,18 +22,11 @@ namespace VisualSort
             InitializeComponent();
         }
 
-        private void populate_random_Click(object sender, EventArgs e)
+        private async void populate_random_Click(object sender, EventArgs e)
         {
-            int[] data = new int[50];
-
-            Random rand = new Random();
-            for (int i = 0; i < data.Length; i ++)
-            {
-                data[i] = rand.Next(0, 100);
-            }
-
-            barGraph1.data = data;
+            barGraph1.data = await GenerateRandomDataAsync(50, 0, 100);
         }
+
 
         private void populate_reversed_Click(object sender, EventArgs e)
         {
@@ -46,7 +40,46 @@ namespace VisualSort
             barGraph1.data = data;
         }
 
-        private void insertion_button_Click(object sender, EventArgs e)
+        #region BUTTON EVENTS
+
+        private async void sort_button_Clicked(object sender, EventArgs e)
+        {
+            var data = barGraph1.data;
+
+            if (sender as Button == insertion_button)
+                data = await InsertionSortAsync();
+            else if (sender as Button == selection_button)
+                data = await InsertionSortAsync();
+            else if (sender as Button == bubble_button)
+                data = await BubbleSortAsync(barGraph1);
+            else if (sender as Button == shell_button)
+                data = await ShellSortAsync();
+            else if (sender as Button == merge_button)
+                data = await MergeSortAsync(data, 0, data.Length);
+
+            if (data != null)
+                barGraph1.data = data;
+        }
+        #endregion
+
+        #region DATA GENERATION
+        private async Task<int[]> GenerateRandomDataAsync(int num, int min, int max)
+        {
+            int[] data = new int[num];
+
+            Random rand = new Random();
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] = rand.Next(min, max);
+            }
+
+            return data;
+        }
+        #endregion
+
+        #region SORTING IMPLMENTATIONS
+        #region INSERTION SORT
+        private async Task<int[]> InsertionSortAsync()
         {
             int[] data = barGraph1.data;
             for (int i = 1; i < data.Length; i++)
@@ -55,7 +88,7 @@ namespace VisualSort
                 int j = i;
                 while (j > 0 && data[j - 1] > x)
                 {
-                    barGraph1.SelectAll(new int[] { j, j - 1 });
+                    await barGraph1.SelectAll(new int[] { j, j - 1 });
                     barGraph1.Swap(j, j - 1);
                     j -= 1;
                     barGraph1.data = data;
@@ -63,28 +96,29 @@ namespace VisualSort
                 data[j] = x;
                 barGraph1.data = data;
             }
+
+            return data;
         }
+        #endregion
 
         #region SELECTION SORT
-        private void selection_button_Click(object sender, EventArgs e)
+        private async Task<int[]> SelectionSortAsync()
         {
             int[] data = barGraph1.data;
             for (int i = 0; i < data.Length; i++)
             {
                 int min = i;
                 //select the pivot point
-                barGraph1.Select(i);
+                await barGraph1.Select(i);
                 for (int j = i + 1; j < data.Length; j++)
                 {
                     //select the potential min
-                    barGraph1.Select(j);
+                    await barGraph1.Select(j);
                     if (data[j] < data[min])
                     {
                         //ignore unselect if first iteration
                         if (j != i + 1) barGraph1.UnSelect(min);
                         min = j;
-                        //select new min
-                        barGraph1.Select(min);
                     }
                     if (j != min)
                     {
@@ -94,35 +128,39 @@ namespace VisualSort
                 }
 
                 //swap the pivot and min
-                barGraph1.Swap(i, min);
+                data = barGraph1.Swap(i, min);
             }
+
+            return data;
         }
         #endregion
 
         #region BUBBLE SORT
-        private void bubble_button_Click(object sender, EventArgs e)
+        private async Task<int[]> BubbleSortAsync(BarGraph graph)
         {
-            int[] data = barGraph1.data;
+            int[] data = graph.data;
             for (int i = 0; i < data.Length; i++)
             {
                 for (int j = 0; j < data.Length - 1; j++)
                 {
                     if (data[j] > data[j + 1])
                     {
-                        barGraph1.SelectAll(new int[] { j, j + 1 });
-                        data = barGraph1.Swap(j, j + 1);
+                        await graph.SelectAll(new int[] { j, j + 1 });
+                        data = graph.Swap(j, j + 1);
                     }
                 }
             }
+
+            return data;
         }
         #endregion
 
         #region SHELL SORT
-        private void shell_button_Click(object sender, EventArgs e)
+        private async Task<int[]> ShellSortAsync()
         {
             int[] data = barGraph1.data;
             int n = data.Length;
-            int k = n/2;
+            int k = n / 2;
 
             while (k > 0)
             {
@@ -131,31 +169,26 @@ namespace VisualSort
                     int index = i;
                     while (data[index] > data[index + k])
                     {
-                        barGraph1.SelectAll(new int[] { index, index + k });
+                        await barGraph1.SelectAll(new int[] { index, index + k });
 
                         data = barGraph1.Swap(index, index + k);
                         index -= k;
                         if (index < 0) break;
                     }
                 }
-                if (k/2 != 0) k /= 2;
+                if (k / 2 != 0) k /= 2;
                 else if (k == 1) k = 0;
                 else k = 1;
             }
 
+            return data;
         }
         #endregion
 
         #region MERGE SORT
-        private void merge_button_Click(object sender, EventArgs e)
-        {
-            int[] data = barGraph1.data;
-            barGraph1.data = subMergeSort(data, 0, data.Length);
-        }
-
         //breaks the data into left and right sub arrays to be further sorted
         // start and finish are used to highlight and update barGraph (not needed for algorithm, purely to create good visual feedback)
-        private int[] subMergeSort(int[] data, int start, int finish)
+        private async Task<int[]> MergeSortAsync(int[] data, int start, int finish)
         {
             if (data.Length == 1) return data;
 
@@ -168,21 +201,21 @@ namespace VisualSort
             Array.Copy(data, left, length);
             Array.Copy(data, length, right, 0, length + remainder);
 
-            left = subMergeSort(left, start, length);
-            right = subMergeSort(right, start + left.Length, length + remainder);
+            left = await MergeSortAsync(left, start, length);
+            right = await MergeSortAsync(right, start + left.Length, length + remainder);
 
-            return Merge(left, right, start, finish);
+            return await Merge(left, right, start, finish);
         }
 
         //merges the left and right arrays into one ordered array
         //start and length are used to highlight the correct values in barGraph
-        private int[] Merge(int[] left, int[] right, int start, int length)
+        private async Task<int[]> Merge(int[] left, int[] right, int start, int length)
         {
             int[] data = new int[left.Length + right.Length];
             int li = 0;
             int ri = 0;
 
-            barGraph1.SelectRange(start, start + length);
+            await barGraph1.SelectRange(start, start + length);
             
             for (int i = 0; i < data.Length; i++)
             {
@@ -211,10 +244,6 @@ namespace VisualSort
             return data;
         }
         #endregion
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            barGraph1.sleepTime = (int) numericUpDown1.Value;
-        }
+        #endregion
     }
 }
